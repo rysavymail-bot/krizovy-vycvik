@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Výcvik pro krizové situace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav aria-label="Hlavní navigace">
+    <a href="#o-vycviku">O výcviku</a>
+    <a href="#moduly">Moduly</a>
+    <a href="#kontakt">Kontakt</a>
+    <a class="login" href="#prihlaseni">Přihlásit se <span>→</span></a>
+  </nav>
+  <section id="prihlaseni" class="modal" aria-hidden="true" aria-labelledby="modal-title">
+    <div class="modal-panel" role="dialog" aria-modal="true">
+      <button class="close" type="button" aria-label="Zavřít přihlašovací okno">×</button>
+      <p class="eyebrow">Účastnický portál</p>
+      <h1 id="modal-title">Přihlášení do výcviku</h1>
+      <form>
+        <label>E-mail<input type="email" placeholder="vas@email.cz" required></label>
+        <label>Heslo<input type="password" placeholder="••••••••" required></label>
+        <button type="submit">Přihlásit se</button>
+        <p class="message" aria-live="polite"></p>
+      </form>
+      <a href="mailto:info@example.cz?subject=Žádost%20o%20přístup">Nemáte přístup? Kontaktujte koordinátora.</a>
+    </div>
+  </section>
+  <script>
+    const modal=document.querySelector('.modal'),login=document.querySelector('.login'),close=document.querySelector('.close');
+    login.addEventListener('click',event=>{event.preventDefault();modal.classList.add('open');modal.setAttribute('aria-hidden','false');modal.querySelector('input').focus()});
+    close.addEventListener('click',()=>{modal.classList.remove('open');modal.setAttribute('aria-hidden','true');login.focus()});
+    modal.addEventListener('click',event=>{if(event.target===modal)close.click()});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'&&modal.classList.contains('open'))close.click()});
+    document.querySelector('form').addEventListener('submit',event=>{event.preventDefault();document.querySelector('.message').textContent='Přihlášení je připraveno k napojení na váš systém.'});
+  </script>
+  <script type="module" src="firebase.js"></script>
+</body>
+</html>
